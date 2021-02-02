@@ -1,3 +1,6 @@
+// write a function that takes in a number as arg. 
+// The function should return the n-th number of fibonacci sequence
+
 const fib = (n, memo = {}) => {
   if (n in memo) return memo[n];
   if (n <= 1) return 1;
