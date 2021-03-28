@@ -9,25 +9,25 @@
 // Output: False
 // There is no subset that add up to 30.
 
-const isSubSet = (targetSum, numbers) => {
-  if (!numbers.includes(0)) numbers.unshift(0);
-  numbers.sort((a, b) => a - b);
-  const matrix = Array(targetSum + 1)
+const isSubSet = (sum, set) => {
+  if (!set.includes(0)) set.unshift(0);
+  set.sort((a, b) => a - b);
+  const matrix = Array(sum + 1)
     .fill()
-    .map(() => Array(numbers.length - 1).fill(false));
+    .map(() => Array(set.length - 1).fill(false));
 
-  for (let i = 0; i < numbers.length; i++) matrix[0][i] = true;
+  for (let i = 0; i < set.length; i++) matrix[0][i] = true;
 
-  for (let i = 1; i <= targetSum; i++) matrix[i][0] = false;
+  for (let i = 1; i <= sum; i++) matrix[i][0] = false;
 
-  for (let i = 1; i <= targetSum; i++) {
-    for (let j = 1; j < numbers.length; j++) {
-      if (numbers[j] > i) matrix[i][j] = matrix[i][j - 1];
-      else matrix[i][j] = matrix[i][j - 1] || matrix[i - numbers[j]][j - 1];
+  for (let i = 1; i <= sum; i++) {
+    for (let j = 1; j < set.length; j++) {
+      if (set[j] > i) matrix[i][j] = matrix[i][j - 1];
+      else matrix[i][j] = matrix[i][j - 1] || matrix[i - set[j]][j - 1];
     }
   }
 
-  return matrix[targetSum][numbers.length - 1];
+  return matrix[sum][set.length - 1];
 };
 
 console.log(isSubSet(9, [3, 34, 4, 12, 5, 2])); // true
