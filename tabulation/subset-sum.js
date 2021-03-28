@@ -11,6 +11,7 @@
 
 const isSubSet = (targetSum, numbers) => {
   if (!numbers.includes(0)) numbers.unshift(0);
+  numbers.sort((a, b) => a - b);
   const matrix = Array(targetSum + 1)
     .fill()
     .map(() => Array(numbers.length - 1).fill(false));
